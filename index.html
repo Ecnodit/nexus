@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Nexus - Enciclopedia delle Calcolatrici</title>
+    <title>Percentili - Nexus</title>
 
     <style>
         body {
@@ -19,74 +19,68 @@
             background-color: #20232a;
             color: white;
             text-align: center;
-            padding: 50px 20px;
+            padding: 35px 20px;
         }
 
         header h1 {
-            font-size: 50px;
-            margin: 0 0 10px 0;
-        }
-
-        header p {
-            font-size: 20px;
             margin: 0;
+            font-size: 40px;
         }
 
         main {
-            max-width: 1100px;
+            max-width: 700px;
             margin: 40px auto;
             padding: 0 20px;
         }
 
-        h2 {
-            text-align: center;
-            font-size: 32px;
-            margin-bottom: 35px;
-        }
-
-        .calcolatrici {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-        }
-
-        .card {
+        .calcolatrice {
             background-color: white;
+            padding: 30px;
             border-radius: 12px;
-            padding: 25px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
 
-        .card h3 {
-            margin-top: 0;
-            font-size: 24px;
+        label {
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            font-weight: bold;
         }
 
-        .card p {
-            line-height: 1.5;
-            color: #555;
-        }
-
-        .card a {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 10px 16px;
-            background-color: #20232a;
-            color: white;
-            text-decoration: none;
+        input {
+            width: 100%;
+            padding: 12px;
+            box-sizing: border-box;
+            font-size: 16px;
+            border: 1px solid #ccc;
             border-radius: 6px;
         }
 
-        .card a:hover {
+        button {
+            margin-top: 25px;
+            padding: 12px 20px;
+            font-size: 16px;
+            background-color: #20232a;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
             background-color: #3a3f48;
         }
 
-        footer {
-            margin-top: 60px;
-            padding: 25px;
-            background-color: #20232a;
-            color: white;
-            text-align: center;
+        #risultato {
+            margin-top: 25px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .indietro {
+            display: inline-block;
+            margin-top: 25px;
+            color: #20232a;
         }
     </style>
 </head>
@@ -94,78 +88,63 @@
 <body>
 
     <header>
-        <h1>Nexus</h1>
-        <p>Enciclopedia delle Calcolatrici</p>
+        <h1>Calcolatrice dei Percentili</h1>
     </header>
 
     <main>
 
-        <h2>Calcolatrici</h2>
+        <div class="calcolatrice">
 
-        <div class="calcolatrici">
+            <h2>Calcola un percentile</h2>
 
-            <div class="card">
-                <h3>Percentili</h3>
+            <p>
+                Inserisci i dati richiesti per effettuare il calcolo.
+            </p>
 
-                <p>
-                    Scopri la posizione di un valore all'interno
-                    di una distribuzione statistica.
-                </p>
+            <label for="valore">Valore</label>
+            <input type="number" id="valore">
 
-                <a href="percentili.html">
-                    Apri calcolatrice
-                </a>
-            </div>
+            <label for="media">Media</label>
+            <input type="number" id="media">
 
+            <label for="deviazione">Deviazione standard</label>
+            <input type="number" id="deviazione">
 
-            <div class="card">
-                <h3>Indice di Massa Corporea</h3>
+            <button onclick="calcolaPercentile()">
+                Calcola
+            </button>
 
-                <p>
-                    Calcola l'Indice di Massa Corporea (BMI)
-                    a partire da altezza e massa.
-                </p>
+            <div id="risultato"></div>
 
-                <a href="bmi.html">
-                    Apri calcolatrice
-                </a>
-            </div>
-
-
-            <div class="card">
-                <h3>Altezza</h3>
-
-                <p>
-                    Calcolatrici e strumenti matematici
-                    relativi all'altezza.
-                </p>
-
-                <a href="altezza.html">
-                    Apri calcolatrice
-                </a>
-            </div>
-
-
-            <div class="card">
-                <h3>QI</h3>
-
-                <p>
-                    Informazioni e strumenti relativi
-                    al quoziente intellettivo.
-                </p>
-
-                <a href="qi.html">
-                    Scopri di più
-                </a>
-            </div>
+            <a class="indietro" href="index.html">
+                ← Torna alla home
+            </a>
 
         </div>
 
     </main>
 
-    <footer>
-        <p>Nexus © 2026</p>
-    </footer>
+    <script>
+
+        function calcolaPercentile() {
+
+            let valore = Number(document.getElementById("valore").value);
+            let media = Number(document.getElementById("media").value);
+            let deviazione = Number(document.getElementById("deviazione").value);
+
+            if (deviazione <= 0) {
+                document.getElementById("risultato").textContent =
+                    "Inserisci una deviazione standard maggiore di 0.";
+                return;
+            }
+
+            let z = (valore - media) / deviazione;
+
+            document.getElementById("risultato").textContent =
+                "Z-score: " + z.toFixed(2);
+        }
+
+    </script>
 
 </body>
 
