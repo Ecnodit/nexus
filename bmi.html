@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BMI - Nexus</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f2f4f7;
+            color: #222;
+        }
+
+        header {
+            background-color: #20232a;
+            color: white;
+            text-align: center;
+            padding: 35px 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 40px;
+        }
+
+        main {
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .calcolatrice {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            box-sizing: border-box;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        button {
+            margin-top: 25px;
+            padding: 12px 20px;
+            font-size: 16px;
+            background-color: #20232a;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #3a3f48;
+        }
+
+        #risultato {
+            margin-top: 25px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .indietro {
+            display: inline-block;
+            margin-top: 25px;
+            color: #20232a;
+        }
+
+        .info {
+            margin-top: 25px;
+            line-height: 1.6;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Calcolatrice BMI</h1>
+    </header>
+
+    <main>
+
+        <div class="calcolatrice">
+
+            <h2>Indice di Massa Corporea</h2>
+
+            <p>
+                Inserisci la tua massa e la tua altezza per calcolare il BMI.
+            </p>
+
+            <label for="peso">Massa (kg)</label>
+            <input type="number" id="peso" min="0" step="0.1" placeholder="Esempio: 60">
+
+            <label for="altezza">Altezza (cm)</label>
+            <input type="number" id="altezza" min="0" step="0.1" placeholder="Esempio: 170">
+
+            <button onclick="calcolaBMI()">
+                Calcola BMI
+            </button>
+
+            <div id="risultato"></div>
+
+            <div class="info">
+                <p>
+                    Il BMI è un indice matematico ottenuto dividendo
+                    la massa in chilogrammi per il quadrato dell'altezza
+                    in metri.
+                </p>
+
+                <p>
+                    Il BMI è uno strumento statistico generale e non
+                    costituisce da solo una valutazione dello stato di salute.
+                </p>
+            </div>
+
+            <a class="indietro" href="index.html">
+                ← Torna alla home
+            </a>
+
+        </div>
+
+    </main>
+
+    <script>
+
+        function calcolaBMI() {
+
+            let peso = Number(document.getElementById("peso").value);
+            let altezzaCm = Number(document.getElementById("altezza").value);
+
+            if (peso <= 0 || altezzaCm <= 0) {
+                document.getElementById("risultato").textContent =
+                    "Inserisci valori validi.";
+                return;
+            }
+
+            let altezzaMetri = altezzaCm / 100;
+
+            let bmi = peso / (altezzaMetri * altezzaMetri);
+
+            document.getElementById("risultato").textContent =
+                "BMI: " + bmi.toFixed(2);
+        }
+
+    </script>
+
+</body>
+
+</html>
